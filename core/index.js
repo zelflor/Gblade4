@@ -18,9 +18,17 @@ const FEATURES = [
   {
     name: "ListVariables",
     path: "./core/scripts/features/ListVariables.js",
-    description: "List all variables in a function",
+    description: "List all variables present in the CSS in one function",
     enabled: true
-  }
+  },
+  
+  // Add a Addon
+  // {
+  //   name: "CustomName",
+  //   path: "./core/addons/CustomName/FeaturesName.js",
+  //   description: "A custom description",
+  //   enabled: true
+  // },
 ];
 
 function injectCSS(path) {
