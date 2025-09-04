@@ -23,5 +23,9 @@ body {
 * {
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
+    list-style: none;
     text-decoration: none;
 }
+
+/* GoldBlade Engine */
