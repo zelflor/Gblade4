@@ -1,0 +1,12 @@
+body {
+    background: var(--color-purple-950);
+    color: var(--color-purple-50);
+}
+
+*::selection {
+    background-color: var(--color-green-900);
+    color: var(--color-red-50);
+}
+img::selection {
+    background-color: var(--color-green-500);
+}

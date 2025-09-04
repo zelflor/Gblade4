@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GB4 Playground</title>
+</head>
+<body>
+    <h1>The default font is Sora ?</h1>
+    <script>
+window.onload = () => {
+  const vars = window.getCSSVariables();
+
+  const grouped = {};
+  vars.forEach(v => {
+    const colorKey = v.parts[1] || "unknown";
+    if (!grouped[colorKey]) grouped[colorKey] = [];
+    grouped[colorKey].push(v);
+  });
+
+  const container = document.createElement("div");
+  container.style.display = "flex";
+  container.style.flexDirection = "column";
+  container.style.gap = "10px";
+  document.body.appendChild(container);
+
+  for (const color in grouped) {
+    const row = document.createElement("div");
+    row.style.display = "flex";
+    row.style.gap = "5px";
+
+    grouped[color].forEach(v => {
+      const div = document.createElement("div");
+      div.textContent = v.parts.join(", ");
+      div.style.background = v.value;
+      div.style.color = "#fff";
+      div.style.padding = "10px";
+      div.style.textAlign = "center";
+      div.style.flex = "1";
+      row.appendChild(div);
+    });
+
+    container.appendChild(row);
+  }
+};
+
+
+
+    </script>
+    <img src="" alt="">
+      <img src="" alt="">
+        <img src="" alt="">
+          <img src="" alt="">
+            <img src="" alt="">
+              <img src="" alt="">
+                <img src="" alt="">
+                <style>
+                    img {
+                        width: 250px;
+                        height: 250px;
+                        object-fit: contain;
+                    }
+                </style>
+    <script src="./core/index.js"></script>
+</body>
+</html>
