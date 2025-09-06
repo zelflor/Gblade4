@@ -21,6 +21,12 @@ const FEATURES = [
     description: "List all variables present in the CSS in one function",
     enabled: true
   },
+  {
+    name: "TransformCard",
+    path: "./core/scripts/features/TransformCard.js",
+    description: "Create a 3D card that moves in relation to the mouse",
+    enabled: false
+  },
   
   // Add a Addon
   // {
