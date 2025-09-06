@@ -6,7 +6,7 @@ body {
 *::selection {
     background-color: var(--color-green-900);
     color: var(--color-red-50);
-    /* Lagacy GoldBlade */
+    /* Legacy GoldBlade */
     text-shadow: 1px 1px 2px #000000aa;
 }
 img::selection {
