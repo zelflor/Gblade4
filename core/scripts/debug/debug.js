@@ -10,9 +10,12 @@
   container.style.zIndex = "9999";
   container.style.overflow = "hidden";
   container.style.height = "0";
+  container.style.borderRadius = "8px 8px 0px  0px ";
   container.style.borderBottom = "8px solid var(--color-purple-800)";
+  container.style.background = "#00000001";
   container.style.transition = "height 0.3s ease";
   container.style.cursor = "pointer";
+  container.style.backdropFilter = "blur(250px)";
 
   const fpsDiv = document.createElement("div");
   fpsDiv.style.fontFamily = "Sora";

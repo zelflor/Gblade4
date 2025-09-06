@@ -90,4 +90,13 @@
         --color-green-900: #112214;
         --color-green-950: #09110a;
         --color-green-1000: #000000;
+
+        --color-background: #0E0B0F;
+        --color-container: #1C161D;
+        --color-button: #362A38;
+        --color-button-hover: #433745;
+        --color-desc: #6C6575;
+        --color-text: #E1DDEB;
+        --color-title: #F8F9FB;
+
 }

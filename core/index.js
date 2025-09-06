@@ -25,7 +25,7 @@ const FEATURES = [
     name: "TransformCard",
     path: "./core/scripts/features/TransformCard.js",
     description: "Create a 3D card that moves in relation to the mouse",
-    enabled: false
+    enabled: true
   },
   
   // Add a Addon
