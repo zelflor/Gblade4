@@ -4,10 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GB4 Playground</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>The default font is Sora ?</h1>
-  <h2>Somes features require a Webserver</h2>
+     <div class="div-responsive-page">
+     <div class="div-banner-welcome">
+          <h1>Welcome in the GB4 :gb: Playgound</h1>
+          <p>This is the default playground for Gblade4. Here, we test all the features available by default* (see FEATURES in index.js).</p>
+     </div>
+     <div class="div-warning">
+            <h4>Somes features require a Webserver</h4>
+            <p>For example, use live server on VSCODE or start a node js server. If you see the coin emoji right after this text, everything is fine! :test:</p>
+     </div>
+     <div class="div-warning">
+          <h2>:warn: The playground is still under development. :warn:</h2>
+          <p>We are planning an update area, layout redesign, demonstration</p>
+     </div>
     
   <h3>Test default img src + 3d card demo</h3>
 <img src="" alt="neutre">
@@ -98,7 +110,8 @@ window.onload = () => {
   container.style.display = "flex";
   container.style.flexDirection = "column";
   container.style.gap = "10px";
-  document.body.appendChild(container);
+  const responsivePage = document.querySelector(".div-responsive-page");
+  responsivePage.appendChild(container);
 
   for (const color in grouped) {
     const row = document.createElement("div");
@@ -124,5 +137,6 @@ window.onload = () => {
 
     </script>
     <script src="./core/index.js"></script>
+    </div>
 </body>
 </html>

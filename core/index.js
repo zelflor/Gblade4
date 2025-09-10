@@ -22,6 +22,12 @@ const FEATURES = [
     enabled: true
   },
   {
+    name: "CustomEmoji",
+    path: "./core/scripts/features/CustomEmoji.js",
+    description: "Manage the display of custom emojis",
+    enabled: true
+  },
+  {
     name: "TransformCard",
     path: "./core/scripts/features/TransformCard.js",
     description: "Create a 3D card that moves in relation to the mouse",
