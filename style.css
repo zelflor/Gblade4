@@ -1,8 +1,36 @@
-/* Default Playground css */
+/* Default Hideout css */
 
+:root {
+        --color-background: #09060a!important;
+        --color-container: #130d1423!important;
+        --color-button: #22172423!important;
+        --color-button-hover: #48314b23!important;
+        --color-desc: #cacaca9c!important;
+        --color-text: #e1ddebd3!important;
+        --color-title: #F8F9FB!important;
+}
+#fog {
+    position: fixed;
+    width: 100svw;
+    height: 100svh;
+    opacity: .5;
+    left: 0;
+    top: 0;
+    object-fit: contain;
+}
+#light {
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      display:block;
+      filter: blur(45px);
+    
+}
 .div-responsive-page {
     position: fixed;
     --number-padding-body: 32px;
+    --number-blur-page: 32px;
     width: calc(100svw - var(--number-padding-body));
     height: calc(100svh - var(--number-padding-body));
     padding: calc(var(--number-padding-body) / 2);
@@ -20,6 +48,8 @@
     width: calc(100% - 30px);
     background-color: var(--color-container);
     color: var(--color-text);
+    backdrop-filter: blur(var(--number-blur-page));
+
 }
 .div-banner-welcome p {
     max-width: 562px;
@@ -41,4 +71,41 @@
     top: 0;
     opacity: .5;
     background-color: var(--color-orange-450);
+}
+
+.features-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    position: relative;
+    width: calc(100% - 32px * 2);
+    min-height: calc(100svh);
+    padding: 32px;
+}
+.features-container .features-list {
+    width: 100%;
+    max-width: 300px;
+    min-width: 100px;
+    position: relative;
+    background: var(--color-container);
+    border-radius: 18px;
+    padding: 8px;
+}
+.features-container .features-list h3 {
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 8px;
+}
+.features-container .features-list .div-btns-list {
+    border-radius: 10px;
+    height: 100%;
+    
+    overflow: hidden;
+    overflow-y: auto;
+}
+.features-container .features-list button {
+    width: 100%;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 0px;
 }

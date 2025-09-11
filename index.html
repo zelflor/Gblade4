@@ -3,24 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GB4 Playground</title>
+    <title>GB4 Hideout</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+       <canvas id="fog"></canvas>
+        <canvas id="light"></canvas>
+          <script>
+          const canvaslight = document.getElementById('light');
+          const ctxd = canvaslight.getContext('2d');
+          let wd = canvaslight.width = innerWidth;
+          let hd = canvaslight.height = innerHeight;
+
+          addEventListener('resize',()=>{
+               wd = canvaslight.width = innerWidth;
+               hd = canvaslight.height = innerHeight;
+          });
+
+          let angle = 0;
+
+          function draw(){
+               ctxd.clearRect(0,0,wd,hd);
+
+               // Origine hors champ, haut gauche
+               const originX = -200 + Math.sin(angle) * 80;
+               const originY = -200;
+
+               // halo cyan
+               const grad1 = ctxd.createRadialGradient(wd/2, hd/2, 0, wd/2, hd/2, Math.max(wd,hd));
+               grad1.addColorStop(0, 'rgba(0,255,255,0.15)');
+               grad1.addColorStop(1, 'rgba(0,0,0,0)');
+
+               // halo magenta subtil
+               const grad2 = ctxd.createRadialGradient(wd/2, hd/2, 0, wd/2, hd/2, Math.max(wd,hd));
+               grad2.addColorStop(0, 'rgba(255,90,180,0.08)');
+               grad2.addColorStop(1, 'rgba(0,0,0,0)');
+
+               ctxd.save();
+               ctxd.globalCompositeOperation = 'lighter';
+
+               // cône cyan large
+               ctxd.fillStyle = grad1;
+               ctxd.beginPath();
+               ctxd.moveTo(originX, originY);
+               ctxd.lineTo(wd/2 - wd/1.5, hd/2 + hd/1.5);
+               ctxd.lineTo(wd/2 + wd/1.5, hd/2 + hd/1.5);
+               ctxd.closePath();
+               ctxd.fill();
+
+               // cône magenta
+               ctxd.fillStyle = grad2;
+               ctxd.beginPath();
+               ctxd.moveTo(originX, originY);
+               ctxd.lineTo(wd/2 - wd/1.6, hd/2 + hd/1.6);
+               ctxd.lineTo(wd/2 + wd/1.6, hd/2 + hd/1.6);
+               ctxd.closePath();
+               ctxd.fill();
+
+               ctxd.restore();
+
+               angle += 0.003;
+               requestAnimationFrame(draw);
+          }
+
+          draw();
+          </script>
+  <script>
+    const canvas = document.getElementById('fog');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = innerWidth;
+    let h = canvas.height = innerHeight;
+
+    const fogParticles = [];
+    function rand(min,max){ return Math.random()*(max-min)+min; }
+    function createFog(){
+      return {
+        x: rand(0,w),
+        y: rand(0,h),
+        vx: rand(-0.05,0.05),
+        vy: rand(-0.03,0.03),
+        size: rand(150,420),
+        opacity: rand(0.015,0.04)
+      };
+    }
+    for(let i=0;i<30;i++) fogParticles.push(createFog());
+
+    addEventListener('resize',()=>{
+      w = canvas.width = innerWidth;
+      h = canvas.height = innerHeight;
+    });
+
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      ctx.globalCompositeOperation = 'lighter';
+      for(const f of fogParticles){
+        f.x += f.vx; f.y += f.vy;
+        if(f.x < -f.size) f.x = w + f.size;
+        if(f.x > w + f.size) f.x = -f.size;
+        if(f.y < -f.size) f.y = h + f.size;
+        if(f.y > h + f.size) f.y = -f.size;
+
+        const g = ctx.createRadialGradient(f.x, f.y, f.size*0.25, f.x, f.y, f.size);
+        g.addColorStop(0, `rgba(200, 200, 255, ${f.opacity})`);
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(f.x, f.y, f.size, 0, Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
      <div class="div-responsive-page">
      <div class="div-banner-welcome">
-          <h1>Welcome in the GB4 :gb: Playgound</h1>
-          <p>This is the default playground for Gblade4. Here, we test all the features available by default* (see FEATURES in index.js).</p>
+          <h1>Welcome in the GB4 :gb: The Hideout</h1>
+          <p>This is the default Hideout for Gblade4. Here, we test all the features available by default* (see FEATURES in index.js).</p>
      </div>
      <div class="div-warning">
             <h4>Somes features require a Webserver</h4>
             <p>For example, use live server on VSCODE or start a node js server. If you see the coin emoji right after this text, everything is fine! :test:</p>
      </div>
-     <div class="div-warning">
-          <h2>:warn: The playground is still under development. :warn:</h2>
+
+    <div class="features-container">
+     <div class="features-list">
+          <h3>List of Features</h3>
+          <div class="div-btns-list">
+               <button>3D card Mouse</button>
+               <button>All default variables</button>
+               <button>Salut</button>
+          </div>
+          
+     </div>
+    </div>
+         <div class="div-warning">
+          <h2>:warn: The Hideout is still under development. :warn:</h2>
           <p>We are planning an update area, layout redesign, demonstration</p>
      </div>
-    
   <h3>Test default img src + 3d card demo</h3>
 <img src="" alt="neutre">
 

@@ -28,4 +28,9 @@ body {
     text-decoration: none;
 }
 
+button {
+    border: none;
+    outline: none;
+}
+
 /* GoldBlade Engine */

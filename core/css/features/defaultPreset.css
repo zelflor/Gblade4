@@ -1,6 +1,7 @@
 body {
     background: var(--color-background);
     color: var(--color-text);
+    --number-padding-default: 8px;
 }
 
 *::selection {
@@ -11,4 +12,14 @@ body {
 }
 img::selection {
     background-color: var(--color-green-500);
+}
+
+button {
+    padding: var(--number-padding-default);
+    background: var(--color-button);
+    color: var(--color-text);
+    font-size: 14px;
+}
+button:hover {
+    background: var(--color-button-hover);
 }
