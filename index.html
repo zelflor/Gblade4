@@ -9,77 +9,71 @@
 <body>
        <canvas id="fog"></canvas>
         <canvas id="light"></canvas>
-          <script>
-          const canvaslight = document.getElementById('light');
-          const ctxd = canvaslight.getContext('2d');
-          let wd = canvaslight.width = innerWidth;
-          let hd = canvaslight.height = innerHeight;
+         <script>
+    const canvasSecond = document.getElementById('light');
+    const ctxSecond = canvasSecond.getContext('2d');
+    let wSecond = canvasSecond.width = innerWidth;
+    let hSecond = canvasSecond.height = innerHeight;
 
-          addEventListener('resize',()=>{
-               wd = canvaslight.width = innerWidth;
-               hd = canvaslight.height = innerHeight;
-          });
+    addEventListener('resize',()=>{
+      wSecond = canvasSecond.width = innerWidth;
+      hSecond = canvasSecond.height = innerHeight;
+    });
 
-          let angle = 0;
+    let angleSecond = 0;
 
-          function draw(){
-               ctxd.clearRect(0,0,wd,hd);
+    function drawSecond(){
+      ctxSecond.clearRect(0,0,wSecond,hSecond);
 
-               // Origine hors champ, haut gauche
-               const originX = -200 + Math.sin(angle) * 80;
-               const originY = -200;
+      const originXSecond = -200 + Math.sin(angleSecond) * 80;
+      const originYSecond = -200;
 
-               // halo cyan
-               const grad1 = ctxd.createRadialGradient(wd/2, hd/2, 0, wd/2, hd/2, Math.max(wd,hd));
-               grad1.addColorStop(0, 'rgba(0,255,255,0.15)');
-               grad1.addColorStop(1, 'rgba(0,0,0,0)');
+      const grad1Second = ctxSecond.createRadialGradient(wSecond/2, hSecond/2, 0, wSecond/2, hSecond/2, Math.max(wSecond,hSecond));
+      grad1Second.addColorStop(0, 'rgba(0,255,255,0.15)');
+      grad1Second.addColorStop(1, 'rgba(0,255,255,0)');
 
-               // halo magenta subtil
-               const grad2 = ctxd.createRadialGradient(wd/2, hd/2, 0, wd/2, hd/2, Math.max(wd,hd));
-               grad2.addColorStop(0, 'rgba(255,90,180,0.08)');
-               grad2.addColorStop(1, 'rgba(0,0,0,0)');
+      const grad2Second = ctxSecond.createRadialGradient(wSecond/2, hSecond/2, 0, wSecond/2, hSecond/2, Math.max(wSecond,hSecond));
+      grad2Second.addColorStop(0, 'rgba(255,90,180,0.08)');
+      grad2Second.addColorStop(1, 'rgba(255,90,180,0)');
 
-               ctxd.save();
-               ctxd.globalCompositeOperation = 'lighter';
+      ctxSecond.save();
+      ctxSecond.globalCompositeOperation = 'lighter';
 
-               // cône cyan large
-               ctxd.fillStyle = grad1;
-               ctxd.beginPath();
-               ctxd.moveTo(originX, originY);
-               ctxd.lineTo(wd/2 - wd/1.5, hd/2 + hd/1.5);
-               ctxd.lineTo(wd/2 + wd/1.5, hd/2 + hd/1.5);
-               ctxd.closePath();
-               ctxd.fill();
+      ctxSecond.fillStyle = grad1Second;
+      ctxSecond.beginPath();
+      ctxSecond.moveTo(originXSecond, originYSecond);
+      ctxSecond.lineTo(wSecond/2 - wSecond/1.5, hSecond/2 + hSecond/1.5);
+      ctxSecond.lineTo(wSecond/2 + wSecond/1.5, hSecond/2 + hSecond/1.5);
+      ctxSecond.closePath();
+      ctxSecond.fill();
 
-               // cône magenta
-               ctxd.fillStyle = grad2;
-               ctxd.beginPath();
-               ctxd.moveTo(originX, originY);
-               ctxd.lineTo(wd/2 - wd/1.6, hd/2 + hd/1.6);
-               ctxd.lineTo(wd/2 + wd/1.6, hd/2 + hd/1.6);
-               ctxd.closePath();
-               ctxd.fill();
+      ctxSecond.fillStyle = grad2Second;
+      ctxSecond.beginPath();
+      ctxSecond.moveTo(originXSecond, originYSecond);
+      ctxSecond.lineTo(wSecond/2 - wSecond/1.6, hSecond/2 + hSecond/1.6);
+      ctxSecond.lineTo(wSecond/2 + wSecond/1.6, hSecond/2 + hSecond/1.6);
+      ctxSecond.closePath();
+      ctxSecond.fill();
 
-               ctxd.restore();
+      ctxSecond.restore();
 
-               angle += 0.003;
-               requestAnimationFrame(draw);
-          }
+      angleSecond += 0.003;
+      requestAnimationFrame(drawSecond);
+    }
 
-          draw();
-          </script>
-  <script>
-    const canvas = document.getElementById('fog');
-    const ctx = canvas.getContext('2d');
-    let w = canvas.width = innerWidth;
-    let h = canvas.height = innerHeight;
+    drawSecond();
+
+    const canvasFog = document.getElementById('fog');
+    const ctxFog = canvasFog.getContext('2d');
+    let wFog = canvasFog.width = innerWidth;
+    let hFog = canvasFog.height = innerHeight;
 
     const fogParticles = [];
     function rand(min,max){ return Math.random()*(max-min)+min; }
     function createFog(){
       return {
-        x: rand(0,w),
-        y: rand(0,h),
+        x: rand(0,wFog),
+        y: rand(0,hFog),
         vx: rand(-0.05,0.05),
         vy: rand(-0.03,0.03),
         size: rand(150,420),
@@ -89,172 +83,238 @@
     for(let i=0;i<30;i++) fogParticles.push(createFog());
 
     addEventListener('resize',()=>{
-      w = canvas.width = innerWidth;
-      h = canvas.height = innerHeight;
+      wFog = canvasFog.width = innerWidth;
+      hFog = canvasFog.height = innerHeight;
     });
 
-    function draw(){
-      ctx.clearRect(0,0,w,h);
-      ctx.globalCompositeOperation = 'lighter';
+    function drawFog(){
+      ctxFog.clearRect(0,0,wFog,hFog);
+      ctxFog.globalCompositeOperation = 'lighter';
       for(const f of fogParticles){
         f.x += f.vx; f.y += f.vy;
-        if(f.x < -f.size) f.x = w + f.size;
-        if(f.x > w + f.size) f.x = -f.size;
-        if(f.y < -f.size) f.y = h + f.size;
-        if(f.y > h + f.size) f.y = -f.size;
+        if(f.x < -f.size) f.x = wFog + f.size;
+        if(f.x > wFog + f.size) f.x = -f.size;
+        if(f.y < -f.size) f.y = hFog + f.size;
+        if(f.y > hFog + f.size) f.y = -f.size;
 
-        const g = ctx.createRadialGradient(f.x, f.y, f.size*0.25, f.x, f.y, f.size);
+        const g = ctxFog.createRadialGradient(f.x, f.y, f.size*0.25, f.x, f.y, f.size);
         g.addColorStop(0, `rgba(200, 200, 255, ${f.opacity})`);
         g.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(f.x, f.y, f.size, 0, Math.PI*2);
-        ctx.fill();
+        ctxFog.fillStyle = g;
+        ctxFog.beginPath();
+        ctxFog.arc(f.x, f.y, f.size, 0, Math.PI*2);
+        ctxFog.fill();
       }
-      requestAnimationFrame(draw);
+      requestAnimationFrame(drawFog);
     }
-    draw();
+
+    drawFog();
   </script>
      <div class="div-responsive-page">
      <div class="div-banner-welcome">
           <h1>Welcome in the GB4 :gb: The Hideout</h1>
           <p>This is the default Hideout for Gblade4. Here, we test all the features available by default* (see FEATURES in index.js).</p>
      </div>
-     <div class="div-warning">
-            <h4>Somes features require a Webserver</h4>
-            <p>For example, use live server on VSCODE or start a node js server. If you see the coin emoji right after this text, everything is fine! :test:</p>
+     <div class="div-warning" id="div-warn-svr">
+            <h4>Features requiring a web server</h4>
+            <p>Some parts of the application will not work if opened directly from the local file. <br> To test all features, launch a web server, such as Live Server or a Node.js server, so that the application is served via HTTP.</p>
      </div>
-
+<script>  if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+    const warnDiv = document.getElementById("div-warn-svr");
+    if (warnDiv) {
+      warnDiv.style.display = "none";
+    }
+  }</script>
     <div class="features-container">
      <div class="features-list">
           <h3>List of Features</h3>
           <div class="div-btns-list">
-               <button>3D card Mouse</button>
-               <button>All default variables</button>
-               <button>Salut</button>
+               <button data-tab-collection="group1" data-tab-btn="1">3D card Mouse</button>
+               <button data-tab-collection="group1" data-tab-btn="2">All default variables</button>
+               <button data-tab-collection="group1" data-tab-btn="3">Tabs system</button>
+               <button data-tab-collection="group1" data-tab-btn="4">Custom Emotes</button>
           </div>
           
+     </div>
+     <div class="div-feature" data-tab-collection="group1" data-tab="1" style="display: flex;">
+          <div class="div-flex-title-features">
+               <h3>3D card Mouse Demo</h3>
+               <p>Here are almost all the possibilities for 3D cards in relation to the position of the mouse.</p>
+               <p>Use the <span class="code-balise">mouse-3d-transform</span> class to then configure each behavior. <br>
+                    - data-sensibility adjusts the sensitivity of the tilt in relation to the distance of the mouse.<br>
+                    - data-hover determines whether it should tilt only when hovered over or not.<br>
+                    - data-lock allows you to lock a rotation on one or more axes.<br>
+                    - data-inverse reverses the tilt in relation to the position of the mouse.<br></p>
+          </div>
+          <div class="div-all-cards-flex-container">
+               <img src="" alt="neutre">
+
+               <img class="mouse-3d-transform" 
+                    data-sensibility="20" 
+                    data-hover="true" 
+                    data-lock="none" 
+                    data-inverse="false" 
+                    src="" alt="hover sensibilité 20">
+
+               <img class="mouse-3d-transform" 
+                    data-sensibility="30" 
+                    data-hover="true" 
+                    data-lock="none" 
+                    data-inverse="false" 
+                    src="" alt="hover sensibilité 30">
+
+               <img class="mouse-3d-transform" 
+                    data-sensibility="2" 
+                    data-hover="false" 
+                    data-lock="none" 
+                    data-inverse="false" 
+                    src="" alt="toujours actif sensibilité 2">
+
+               <img class="mouse-3d-transform" 
+                    data-sensibility="25" 
+                    data-hover="true" 
+                    data-lock="y" 
+                    data-inverse="false" 
+                    src="" alt="lock y">
+
+               <img class="mouse-3d-transform" 
+                    data-sensibility="25" 
+                    data-hover="true" 
+                    data-lock="x" 
+                    data-inverse="false" 
+                    src="" alt="lock x">
+
+               <img class="mouse-3d-transform" 
+                    data-sensibility="20" 
+                    data-hover="true" 
+                    data-lock="none" 
+                    data-inverse="true" 
+                    src="" alt="inverse">
+
+               <img class="mouse-3d-transform" 
+                    data-sensibility="15" 
+                    data-hover="false" 
+                    data-lock="y" 
+                    data-inverse="true" 
+                    src="" alt="inverse + lock y">
+
+               <img class="mouse-3d-transform" 
+                    data-sensibility="15" 
+                    data-hover="false" 
+                    data-lock="none" 
+                    data-inverse="true" 
+                    src="" alt="inverse + lock none">
+
+               <img class="mouse-3d-transform" 
+                    data-sensibility="15" 
+                    data-hover="false" 
+                    data-lock="x" 
+                    data-inverse="false" 
+                    src="" alt="lock x">
+               </div>
+
+
+     </div>
+     <div class="div-feature" id="all-variables-demo" data-tab-collection="group1" data-tab="2" style="display: none;">
+          <div class="div-flex-title-features">
+               <h3>All Default GB CSS import variables</h3>
+               <p>Here are all the variables present in the CSS. If some are modified when they have already been declared, the display of the variables depends on which loads first.</p>
+               <p>Use <span class="code-balise">getCSSVariables()</span> to retrieve all CSS variables.</p>
+          </div>
+          <script>
+          window.onload = () => {
+          const vars = window.getCSSVariables();
+
+          const grouped = {};
+          vars.forEach(v => {
+          const colorKey = v.parts[1] || "unknown";
+          if (!grouped[colorKey]) grouped[colorKey] = [];
+          grouped[colorKey].push(v);
+          });
+
+          const container = document.createElement("div");
+          container.style.display = "flex";
+          container.style.flexDirection = "column";
+          container.style.gap = "10px";
+          const responsivePage = document.querySelector("#all-variables-demo");
+          responsivePage.appendChild(container);
+
+          for (const color in grouped) {
+          const row = document.createElement("div");
+          row.style.display = "flex";
+          row.style.gap = "5px";
+
+          grouped[color].forEach(v => {
+               const div = document.createElement("div");
+               div.textContent = v.parts.join(", ");
+               div.style.background = v.value;
+               div.style.color = "#fff";
+               div.style.textShadow = "0px 0px 1px #000000";
+               div.style.fontSize = "10px";
+               div.style.padding = "10px";
+               div.style.textAlign = "center";
+               div.style.flex = "1";
+               row.appendChild(div);
+          });
+
+          container.appendChild(row);
+          }
+          };
+
+
+
+    </script></div>
+     <div class="div-feature" data-tab-collection="group1" data-tab="3" style="display: none;">
+          <div class="div-flex-title-features">
+               <h3>Tabs system</h3>
+               <p>Add buttons with <span class="code-balise">data-tab-collection</span> and <span class="code-balise">data-tab-btn</span>, and panels with <span class="code-balise">data-tab-collection</span> and <span class="code-balise">data-tab</span>.
+When you click a button, all panels in that collection are hidden, and the one matching the button’s ID is shown using flex.</p>
+             
+          </div>
+          
+       <div class="tabs">
+          <button data-tab-collection="group4" data-tab-btn="1">G4 – Onglet 1</button>
+          <button data-tab-collection="group4" data-tab-btn="2">G4 – Onglet 2</button>
+          <button data-tab-collection="group4" data-tab-btn="4">G4 – Onglet 3</button>
+
+          <div data-tab-collection="group4" data-tab="1">Contenu 1 du groupe 4</div>
+          <div data-tab-collection="group4" data-tab="2">Contenu 2 du groupe 4</div>
+          <div data-tab-collection="group4" data-tab="4">Contenu 3 du groupe 4</div>
+          </div>
+          <hr>
+          <div class="tabs">
+          <button data-tab-collection="group2" data-tab-btn="1">G2 – Onglet 1</button>
+          <button data-tab-collection="group2" data-tab-btn="2">G2 – Onglet 2</button>
+
+          <div data-tab-collection="group2" data-tab="1">Contenu 1 du groupe 2</div>
+          <div data-tab-collection="group2" data-tab="2">Contenu 2 du groupe 2</div>
+          </div>
+               <hr>
+          <div class="tabs">
+          <button data-tab-collection="group3" data-tab-btn="a">G3 – Onglet A</button>
+          <button data-tab-collection="group3" data-tab-btn="b">G3 – Onglet B</button>
+
+          <div data-tab-collection="group3" data-tab="a">Contenu A du groupe 3</div>
+          <div data-tab-collection="group3" data-tab="b">Contenu B du groupe 3</div>
+          </div>
+     </div>
+     <div class="div-feature" data-tab-collection="group1" data-tab="4" style="display: none;">
+          <div class="div-flex-title-features">
+               <h3></h3>
+               <p></p>
+                         
+          </div>
      </div>
     </div>
          <div class="div-warning">
           <h2>:warn: The Hideout is still under development. :warn:</h2>
           <p>We are planning an update area, layout redesign, demonstration</p>
      </div>
-  <h3>Test default img src + 3d card demo</h3>
-<img src="" alt="neutre">
 
-<img class="mouse-3d-transform" 
-     data-sensibility="20" 
-     data-hover="true" 
-     data-lock="none" 
-     data-inverse="false" 
-     src="" alt="hover sensibilité 20">
-
-<img class="mouse-3d-transform" 
-     data-sensibility="30" 
-     data-hover="true" 
-     data-lock="none" 
-     data-inverse="false" 
-     src="" alt="hover sensibilité 30">
-
-<img class="mouse-3d-transform" 
-     data-sensibility="2" 
-     data-hover="false" 
-     data-lock="none" 
-     data-inverse="false" 
-     src="" alt="toujours actif sensibilité 2">
-
-<img class="mouse-3d-transform" 
-     data-sensibility="25" 
-     data-hover="true" 
-     data-lock="y" 
-     data-inverse="false" 
-     src="" alt="lock y">
-
-<img class="mouse-3d-transform" 
-     data-sensibility="25" 
-     data-hover="true" 
-     data-lock="x" 
-     data-inverse="false" 
-     src="" alt="lock x">
-
-<img class="mouse-3d-transform" 
-     data-sensibility="20" 
-     data-hover="true" 
-     data-lock="none" 
-     data-inverse="true" 
-     src="" alt="inverse">
-
-<img class="mouse-3d-transform" 
-     data-sensibility="15" 
-     data-hover="false" 
-     data-lock="y" 
-     data-inverse="true" 
-     src="" alt="inverse + lock y">
-
-<img class="mouse-3d-transform" 
-     data-sensibility="15" 
-     data-hover="false" 
-     data-lock="none" 
-     data-inverse="true" 
-     src="" alt="inverse + lock none">
-
-<img class="mouse-3d-transform" 
-     data-sensibility="15" 
-     data-hover="false" 
-     data-lock="x" 
-     data-inverse="false" 
-     src="" alt="lock x">
-    <style>
-        img {
-            width: 250px;
-            height: 250px;
-            object-fit: contain;
-        }
-    </style>
-
-<h3>All CSS import variables</h3>
-    <script>
-window.onload = () => {
-  const vars = window.getCSSVariables();
-
-  const grouped = {};
-  vars.forEach(v => {
-    const colorKey = v.parts[1] || "unknown";
-    if (!grouped[colorKey]) grouped[colorKey] = [];
-    grouped[colorKey].push(v);
-  });
-
-  const container = document.createElement("div");
-  container.style.display = "flex";
-  container.style.flexDirection = "column";
-  container.style.gap = "10px";
-  const responsivePage = document.querySelector(".div-responsive-page");
-  responsivePage.appendChild(container);
-
-  for (const color in grouped) {
-    const row = document.createElement("div");
-    row.style.display = "flex";
-    row.style.gap = "5px";
-
-    grouped[color].forEach(v => {
-      const div = document.createElement("div");
-      div.textContent = v.parts.join(", ");
-      div.style.background = v.value;
-      div.style.color = "#fff";
-      div.style.padding = "10px";
-      div.style.textAlign = "center";
-      div.style.flex = "1";
-      row.appendChild(div);
-    });
-
-    container.appendChild(row);
-  }
-};
+  
 
 
-
-    </script>
+    
     <script src="./core/index.js"></script>
     </div>
 </body>

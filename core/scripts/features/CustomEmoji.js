@@ -78,6 +78,7 @@ function injectEmojiStyle() {
         font-weight: 400;
         line-height: normal;
         pointer-events: none;
+        backdrop-filter: blur(250px);
         z-index: 10;
         left: 50%;
         transform: translateX(-50%) translateY(-100%);

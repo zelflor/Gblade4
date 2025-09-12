@@ -27,6 +27,12 @@ const FEATURES = [
     description: "Manage the display of custom emojis",
     enabled: true
   },
+    {
+    name: "DisplayTabs",
+    path: "./core/scripts/features/DisplayTabs.js",
+    description: "ultra-lightweight system for displaying/hiding content in the interface according to logical groups",
+    enabled: true
+  },
   {
     name: "TransformCard",
     path: "./core/scripts/features/TransformCard.js",
