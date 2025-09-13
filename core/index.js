@@ -39,6 +39,12 @@ const FEATURES = [
     description: "Create a 3D card that moves in relation to the mouse",
     enabled: true
   },
+  {
+    name: "GetKeyColor",
+    path: "./core/scripts/features/GetKeyColor.js",
+    description: "Retrieves up to 3 key colors from an image",
+    enabled: true
+  },
   
   // Add a Addon
   // {
